@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import TopBar from './components/TopBar';
 import Header from './components/Header';
 import Content from './components/Content/Content';
+import CallToAction from './components/CallToAction';
+import withAuthentication from './components/withAuthentication';
 
 const AppWrapper = styled.div`
   display: flex;
@@ -14,11 +16,14 @@ const AppWrapper = styled.div`
 `;
 
 const App = () => {
+
+  const AuthGuard = withAuthentication(Content)(CallToAction);
+
   return (
     <AppWrapper>
       <TopBar />
       <Header />
-      <Content />
+      <AuthGuard />
     </AppWrapper>
   );
 }
