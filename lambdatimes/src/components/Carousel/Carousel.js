@@ -1,5 +1,76 @@
 import React, {Component} from 'react';
+import styled from 'styled-components';
 import {carouselData} from '../../data';
+
+const CarouselWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  height: 500px;
+  position: relative;
+  overflow: hidden;
+  margin-top: 16px;
+
+  @media (min-width: 1200px) {
+
+    width: 1200px;
+  }
+`;
+
+const CarouselImageWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  height: 500px;
+  position: relative;
+  overflow: hidden;
+  margin-top: 16px;
+
+  @media (min-width: 1200px) {
+    width: 1200px;
+  }
+
+  img {
+    width: 100%;
+    display: none;
+  }
+`;
+
+const CarouselButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: none;
+  flex-direction: row;
+  color: #fff;
+  background-color: #333;
+  font-size: 40px;
+  border-radius: 50%;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  z-index: 9999;
+
+  &:hover {
+    color: #333;
+    background-color: #fff;
+    border: 2px solid #333;
+  }
+
+  top: 50%;
+  ${({left}) => left ? `left: 25px;` : `right: 25px;`}
+  transform: translate(0, -50%);
+`;
+
+/*
+
+  .carousel 
+
+*/
 
 export default class Carousel extends Component {
     constructor(props) {
@@ -42,11 +113,11 @@ export default class Carousel extends Component {
 
     render() {
         return (
-            <div className="carousel">
-                <div className="left-button" onClick={this.leftClick}>{"<"}</div>
-                <div className="right-button" onClick={this.rightClick}>{">"}</div>
-                {this.selectedImage()}
-            </div>
+            <CarouselWrapper>
+                <CarouselButton left onClick={this.leftClick}>{"<"}</CarouselButton>
+                <CarouselButton onClick={this.rightClick}>{">"}</CarouselButton>
+                <CarouselImageWrapper>{this.selectedImage()}</CarouselImageWrapper>
+            </CarouselWrapper>
         )
     }
 }
